@@ -1,15 +1,20 @@
-# Dracula Theme v0.7.5
+# Dracula Theme v0.7.0
 #
 # https://github.com/zenorocha/dracula-theme
 #
-# Copyright 2015, All rights reserved
+# Copyright 2013, All rights reserved
 #
 # Code licensed under the MIT license
 # http://zenorocha.mit-license.org
 #
 # @author Zeno Rocha <hi@zenorocha.com>
 
-PROMPT='%{$fg_bold[green]%}➜ %{$fg_bold[green]%}%p %{$fg_bold[blue]%}%c $(git_prompt_info)% %{$reset_color%}'
+function hg_prompt_info {
+    hg prompt --angle-brackets "\
+%{$fg_bold[cyan]%}(<branch>%{$fg_bold[grey]%}|%{$fg_bold[white]%}<queue>%{$fg_bold[grey]%}|%{$fg[magenta]%}<patch>%{$fg_bold[cyan]%})%{$fg_bold[yellow]%} <status><update>" 2>/dev/null
+}
+
+PROMPT='%{$fg_bold[green]%}➜ %{$fg_bold[green]%}%p %{$fg_bold[blue]%}%c $(hg_prompt_info)$(git_prompt_info)% %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_CLEAN=") %{$fg_bold[green]%}✔ "
 ZSH_THEME_GIT_PROMPT_DIRTY=") %{$fg_bold[yellow]%}✗ "
